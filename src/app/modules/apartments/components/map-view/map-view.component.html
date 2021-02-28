@@ -1,0 +1,27 @@
+<ng-container *ngIf="apartments$ | async as apartments">
+    <ng-container *ngFor="let apartment of apartments; trackBy: trackById">
+        <app-map-marker *ngIf="apartment"
+                        [marker]="apartment.marker"
+                        [isMulti]="apartments.length > 1"
+                        (clicked)="onMarkerClicked($event, apartments.length > 1)"
+                        (locationUpdated)="apartmentsService.updateApartmentLocation(apartment, $event, true)">
+        </app-map-marker>
+    </ng-container>
+    <div class="map-extra">
+        <button (click)="toggleEditMode()"
+                [color]="editMode ? 'accent' : 'primary'"
+                [matTooltip]="(editMode ? 'Disable' : 'Enable') + ' edit mode'"
+                class="map-extra__edit-mode" mat-fab>
+            <mat-icon >
+                {{editMode ? 'close' : 'create'}}
+            </mat-icon>
+        </button>
+    
+        <mat-chip-list *ngIf="editMode" aria-readonly="true">
+            <mat-chip color="accent">
+                {{editMode ? 'Edit Mode - (Drag n Drop)' : ''}}
+            </mat-chip>
+        </mat-chip-list>
+    </div>
+    
+</ng-container>

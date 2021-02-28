@@ -1,0 +1,11 @@
+@import "src/theme/theme-variables";
+:host {
+  height: $footer-height;
+}
+
+footer {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

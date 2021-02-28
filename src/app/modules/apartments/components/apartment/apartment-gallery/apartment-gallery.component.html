@@ -1,0 +1,10 @@
+<div class="apartment-gallery">
+  <div (click)="openImageGallery(apartment.photos, i)"
+       role="button"
+       tabindex="0"
+       class="apartment-gallery__photo"
+       *ngFor="let photo of apartment.photos |  slice:0:3; let i=index">
+    <img class="mat-elevation-z1" loading="lazy" alt="apartment.name" [src]="photo" />
+    <span class="apartment-gallery__photo__more" *ngIf="i === 2"> {{apartment.photos.length}} photo{{apartment.photos.length > 1 ? 's' : ''}} </span>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<section class="apartments-container apartments-detail-list">
+  <div class="apartments-container__title">
+    <span class="apartment-title-bar__text" *ngIf="agentInfo$ | async as agentInfo">
+      {{agentInfo.firstname}} {{agentInfo.lastname}} | {{agentInfo.company}}
+    </span>
+  </div>
+  <div class="apartments-container__body">
+    <ng-container *ngFor="let apartment of apartments$ | async; trackBy: trackById">
+      
+      <app-apartments-thumbnail [apartment]="apartment"></app-apartments-thumbnail>
+    </ng-container>
+  </div>
+</section>

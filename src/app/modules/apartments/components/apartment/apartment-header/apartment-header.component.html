@@ -1,0 +1,33 @@
+<div class="apartment-header">
+  <div class="apartment-header__name">
+    <p>{{apartment.name}}</p>
+    <button *ngIf="apartment.email || apartment.phone || apartment.url"
+            mat-icon-button [matMenuTriggerFor]="menu"
+            color="accent"
+            aria-label="Contact Menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </div>
+  
+  <p class="apartments-header__address">{{apartment.streetAddress ? apartment.streetAddress + '-' : ''}} {{apartment.city}}</p>
+  
+  
+  <!--  MORE OPTIONS MENU --->
+  <mat-menu #menu="matMenu">
+    <button *ngIf="apartment.email" mat-menu-item>
+      <mat-icon>mail</mat-icon>
+      <span>Email</span>
+    </button>
+    <button *ngIf="apartment.phone" mat-menu-item>
+      <mat-icon>phone</mat-icon>
+      <span>Phone</span>
+    </button>
+    <button *ngIf="apartment.url" mat-menu-item>
+      <mat-icon>open_in_browser</mat-icon>
+      <span>Website</span>
+    </button>
+  </mat-menu>
+</div>
+
+
+

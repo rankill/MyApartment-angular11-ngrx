@@ -1,0 +1,80 @@
+@import 'src/theme/theme-variables';
+@import "src/theme/theme-breakpoints";
+
+.thumb-card {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem;
+  flex-direction: column;
+
+  transition: all 300ms linear;
+  cursor: pointer;
+
+
+
+  @include for-size(tablet-portrait-up) {
+    flex-direction: row;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+
+    @include for-size(tablet-portrait-up) {
+      margin-right: 1rem;
+    }
+
+    &__name {
+      margin-bottom: 0;
+    }
+
+    &__main-info{
+      margin-bottom: 1rem;
+      font-size: 0.6rem;
+      color: $silent-text;
+    }
+
+    &__info {
+      flex: auto;
+
+      display: flex;
+
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+
+
+      &__amenities {
+        display: flex;
+        align-items: center;
+      }
+
+      &__ {
+        color: $silent-text;
+      }
+    }
+
+    &__image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: auto;
+      margin-top: 1rem;
+
+      @include for-size(tablet-portrait-up) {
+        display: contents;
+        flex-direction: row;
+      }
+
+      img {
+        position: sticky;
+        top: 0;
+
+        border-radius: 0.4rem;
+      }
+    }
+  }
+
+}

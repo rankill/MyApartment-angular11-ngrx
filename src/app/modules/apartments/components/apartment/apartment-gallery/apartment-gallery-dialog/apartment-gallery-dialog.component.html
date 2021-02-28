@@ -1,0 +1,25 @@
+<div class="apartment-gallery-dialog__header">
+  <h2 mat-dialog-title>Gallery Images</h2>
+  <button mat-icon-button
+          mat-dialog-close
+          color="primary"
+          aria-label="Close gallery">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content class="apartment-gallery-dialog__content">
+  <div *ngFor="let image of data.images; let i=index" class="apartment-gallery-dialog__img">
+    <img *ngIf="selectedImageIndex === i" [src]="image" alt="image_{{i}}" />
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="apartment-gallery-dialog__actions">
+  <button (click)="goPrev()" mat-fab color="primary" aria-label="Prev image">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </button>
+  
+  <button (click)="goNext()" mat-fab color="primary" aria-label="Next image">
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </button>
+</mat-dialog-actions>

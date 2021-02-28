@@ -1,0 +1,72 @@
+@import 'src/theme/theme-variables';
+
+.apartments-container {
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  overflow-y: hidden;
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    flex: 0 0 1rem;
+
+    max-height: 1rem;
+
+    font-size: 14px;
+    z-index: 5;
+
+    background-color: mat-color($primary);
+    padding: $sections-padding;
+    color: white;
+
+    &__text {
+      font-size: 1rem;
+    }
+  }
+
+  &__body {
+    background-color: #fafafa;
+    flex: 1 1 auto;
+    overflow-y: auto;
+  }
+}
+
+.mapboxgl-ctrl {
+  &__center-on-markers {
+    display: flex;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+
+    cursor: pointer;
+    transition: all 300ms linear;
+
+    &:hover {
+      opacity: .8;
+    }
+
+    &:active {
+      transform: scale(.8);
+    }
+
+    img {
+      width: 80%;
+      height: auto;
+    }
+  }
+}
+
+.silent-text {
+  color: $silent-text;
+}
+
+.w-100 {
+  width: 100%;
+}

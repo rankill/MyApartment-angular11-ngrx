@@ -1,0 +1,39 @@
+<section class="apartments-container apartments-detail" *ngIf="apartment$ | async as apartment">
+  <div class="apartments-container__title">
+    <div>
+      <a mat-icon-button (click)="goBack()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_back</mat-icon>
+      </a>
+      <span class="apartment-title-bar__text">Back</span>
+    </div>
+  
+    <app-fav-icon [isFavorite]="apartment.favorite"
+                  (clicked)="apartmentsService.toggleFavorite(apartment, true)">
+    </app-fav-icon>
+  </div>
+  
+  <div class="apartments-container__body">
+    <app-apartment-header [apartment]="apartment"></app-apartment-header>
+    <app-apartment-gallery [apartment]="apartment"></app-apartment-gallery>
+
+    <mat-tab-group>
+      <mat-tab class="hey">
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">night_shelter</mat-icon>
+          Overview
+        </ng-template>
+
+        <app-apartment-overview [apartment]="apartment"></app-apartment-overview>
+      </mat-tab>
+      
+      <mat-tab *ngIf="apartment.floorplans.length">
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">list</mat-icon>
+          Distributions
+        </ng-template>
+        
+        <app-apartment-plans [apartment]="apartment"></app-apartment-plans>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</section>

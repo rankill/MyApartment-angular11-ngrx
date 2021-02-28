@@ -1,0 +1,19 @@
+:host {
+  display: flex;
+  align-items: center;
+}
+
+.fav-icon {
+  opacity: 1;
+  transition: all 100ms linear;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+    transform: scale(1.4);
+  }
+
+  &--highlight {
+    color: red;
+  }
+}

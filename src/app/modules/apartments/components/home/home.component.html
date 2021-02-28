@@ -1,0 +1,10 @@
+<section class="home">
+  <mat-drawer-container class="home__drawer">
+    <mat-drawer class="home__drawer__sidenav" mode="side" opened="true">
+      <router-outlet></router-outlet>
+    </mat-drawer>
+    <mat-drawer-content class="home__drawer__content" style="width: 100%">
+      <app-map></app-map>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</section>

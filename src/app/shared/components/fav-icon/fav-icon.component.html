@@ -1,0 +1,7 @@
+<mat-icon aria-hidden="false"
+          class="fav-icon {{className}}"
+          [class.fav-icon--highlight]="isFavorite"
+          aria-label="Marker Icon"
+          (click)="onClick()">
+  {{isFavorite ? 'favorite' : 'favorite_border' }}
+</mat-icon>

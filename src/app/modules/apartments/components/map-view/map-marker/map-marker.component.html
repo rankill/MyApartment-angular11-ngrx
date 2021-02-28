@@ -1,0 +1,16 @@
+<div class="map-marker" *ngIf="marker">
+  <mat-icon *ngIf="marker.isFavorite"
+            class="map-marker__favorite"
+            [attr.aria-hidden]="!marker.isFavorite"
+            aria-label="Favorite Icon">
+    favorite
+  </mat-icon>
+  
+  <mat-icon class="map-marker__icon"
+            color="primary"
+            aria-hidden="false"
+            aria-label="Marker Icon"
+            (click)="markerClicked()">
+    {{isMulti ? 'place' : 'push_pin' }}
+  </mat-icon>
+</div>

@@ -1,0 +1,32 @@
+@import '../../../../../../../node_modules/@angular/material/theming';
+@import '../../../../../../theme/theme';
+
+$marker-size: 3em;
+.map-marker {
+  position: relative;
+  width: $marker-size;
+  &__favorite {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    color: red;
+
+    font-size: calc(#{$marker-size} / 2);
+  }
+
+  &__icon {
+    cursor: pointer;
+    font-size: $marker-size;
+
+    &:hover {
+      opacity: .8;
+      color: mat-color($accent);
+    }
+  }
+}

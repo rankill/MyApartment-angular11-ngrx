@@ -1,0 +1,37 @@
+<mat-card role="button" tabindex="0" class="thumb-card mat-elevation-z1"
+          (mouseover)="isHovered = true"
+          (mouseleave)="isHovered = false"
+          [routerLink]="[apartment.propertyID]"
+          [class.mat-elevation-z8]="isHovered">
+  <div class="thumb-card__item">
+    <h2 class="thumb-card__item__name">
+      {{apartment.name}}
+    </h2>
+    <div class="thumb-card__item__main-info">
+      <span>
+        {{apartment.streetAddress}} - {{apartment.city}}
+      </span>
+      <div *ngIf="apartment.floorplans.length" class="thumb-card__item__main-info__price silent-text">
+        ${{apartment.floorplans[0].price}}
+    
+        {{apartment.floorplans.length > 1 ? '- $'+apartment.floorplans[apartment.floorplans.length - 1].price : ''}}
+      </div>
+    </div>
+    
+    <hr class="w-100">
+    
+    <div class="thumb-card__item__info">
+      <div *ngIf="apartment.highValueAmenities.length" class="thumb-card__item__info__amenities silent-text">
+        <mat-icon color="primary">list</mat-icon>
+        <span>{{ apartment.highValueAmenities.length }} High value amenities</span>
+      </div>
+  
+      <app-fav-icon [isFavorite]="apartment.favorite"
+                    (clicked)="apartmentsService.toggleFavorite(apartment)">
+      </app-fav-icon>
+    </div>
+  </div>
+  <div class="thumb-card__item__image">
+    <img class="mat-elevation-z3" [alt]="apartment.name" [src]="apartment.photo">
+  </div>
+</mat-card>
