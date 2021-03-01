@@ -1,3 +1,20 @@
-.apartments-detail {
+@import 'src/theme/theme-variables';
 
+.apartments-detail {
+  overflow: hidden;
+
+  ::ng-deep .mat-tab-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    overflow-y: auto;
+
+    .mat-tab-label {
+      width: 50%;
+    }
+
+    .mat-tab-body-wrapper {
+      overflow: auto;
+    }
+  }
 }

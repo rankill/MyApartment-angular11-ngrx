@@ -23,9 +23,5 @@ export class ApartmentGalleryComponent implements OnInit {
         currentIndex: index
       }
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
   }
 }

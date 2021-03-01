@@ -1,13 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { FooterComponent } from './footer.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {FooterComponent} from './footer.component';
+import {LoadingBarHttpClientModule} from '@ngx-loading-bar/http-client';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
   let fixture: ComponentFixture<FooterComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync (() => {
     TestBed.configureTestingModule({
+      imports: [LoadingBarHttpClientModule],
       declarations: [ FooterComponent ]
     })
     .compileComponents();

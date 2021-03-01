@@ -1,10 +1,10 @@
 <ng-container *ngIf="apartments$ | async as apartments">
-    <ng-container *ngFor="let apartment of apartments; trackBy: trackById">
+    <ng-container *ngFor="let apartment of apartments">
         <app-map-marker *ngIf="apartment"
                         [marker]="apartment.marker"
-                        [isMulti]="apartments.length > 1"
-                        (clicked)="onMarkerClicked($event, apartments.length > 1)"
-                        (locationUpdated)="apartmentsService.updateApartmentLocation(apartment, $event, true)">
+                        [isSelected]="isApartmentSelected"
+                        (clicked)="onMarkerClicked($event, isApartmentSelected)"
+                        (locationUpdated)="apartmentsService.updateApartmentLocation(apartment, $event, isApartmentSelected)">
         </app-map-marker>
     </ng-container>
     <div class="map-extra">

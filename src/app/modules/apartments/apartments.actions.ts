@@ -1,7 +1,7 @@
 import {createAction, props} from '@ngrx/store';
 import {AgentInfo} from './model/agent.model';
 import {Update} from '@ngrx/entity';
-import {Apartment} from './model/apartment.model';
+import {Apartment, ApartmentsFilterTerm} from './model/apartment.model';
 
 
 /*  AGENT & APARTMENTS ACTIONS */
@@ -34,6 +34,13 @@ export const apartmentUpdated = createAction(
   '[Apartment Detail] Update Apartment',
   props<{update: Update<Apartment>}>()
 );
+
+export const updateFilters = createAction(
+  '[Apartment List] Update Filters',
+  props<{filters: ApartmentsFilterTerm}>()
+);
+
+export const clearFilters = createAction('[Apartment List] Clear Filters');
 
 export const toggleEditMode = createAction('[Apartment Map View] Toggle Edit mode');
 

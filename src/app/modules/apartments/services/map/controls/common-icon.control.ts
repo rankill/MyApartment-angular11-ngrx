@@ -1,11 +1,19 @@
 import * as mapboxgl from 'mapbox-gl';
 import {Subject} from 'rxjs';
 
-export class CenterOnMarkersControl {
+export class CommonIconControl {
   private container!: HTMLElement;
   private map: mapboxgl.Map | undefined;
 
-  constructor() {
+  url: string;
+  alt: string;
+  controlClass: string;
+
+  constructor(imageUrl?: string, imageAlt?: string, className?: string) {
+    this.url = imageUrl || '/assets/icons/center-map.svg';
+    this.alt = imageAlt || 'Map icon';
+    this.controlClass = className || 'mapboxgl-ctrl__common-icon-control';
+
     this.configureContainer();
   }
 
@@ -22,22 +30,22 @@ export class CenterOnMarkersControl {
     this.map = undefined;
   }
 
-  createIcon(): HTMLElement {
+  createImageIcon(): HTMLElement {
     const image = document.createElement('img');
-    image.setAttribute('src', '/assets/icons/center-map.svg');
-    image.setAttribute('alt', 'Center On Marker Control');
+    image.setAttribute('src', this.url);
+    image.setAttribute('alt', this.alt);
     return image;
   }
 
   configureContainer(): void {
-    const iconElement = this.createIcon();
+    const imageIconElement = this.createImageIcon();
     this.container = document.createElement('div');
 
     this.container.setAttribute('role', 'button');
     this.container.setAttribute('tabindex', '0');
 
-    this.container.classList.add('mapboxgl-ctrl', 'mapboxgl-ctrl-group', 'mapboxgl-ctrl__center-on-markers');
-    this.container.appendChild(iconElement);
+    this.container.classList.add('mapboxgl-ctrl', 'mapboxgl-ctrl-group', this.controlClass);
+    this.container.appendChild(imageIconElement);
   }
 
   onPressed(cb: () => void): void {

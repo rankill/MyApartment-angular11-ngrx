@@ -18,6 +18,10 @@ $sidenav-width: 450px;
     width: 100%;
     height: 100%;
 
+    .mat-drawer-inner-container {
+      overflow: hidden;
+    }
+
     &__sidenav {
       padding: 0;
       width: 100%;

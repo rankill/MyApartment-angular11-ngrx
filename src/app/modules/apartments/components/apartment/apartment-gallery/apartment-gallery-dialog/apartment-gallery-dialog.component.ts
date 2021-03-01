@@ -10,14 +10,8 @@ export class ApartmentGalleryDialogComponent {
   selectedImageIndex: number;
   imagesAmount: number;
   constructor(@Inject(MAT_DIALOG_DATA) public data: {images: string[], currentIndex: number}) {
-    // will log the entire data object
-    console.log(this.data);
     this.selectedImageIndex = this.data.currentIndex;
     this.imagesAmount = this.data.images.length - 1;
-  }
-
-  selectImage(index: number): void {
-    this.selectedImageIndex = index;
   }
 
   goPrev(): void {

@@ -1,0 +1,25 @@
+<div class="overview-amenities">
+  <mat-accordion>
+    <ng-container *ngFor="let amenitiesItem of amenitiesIndex">
+      <mat-expansion-panel *ngIf="apartment[amenitiesItem.index]">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ amenitiesItem.title }}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{ apartment[amenitiesItem.index].length }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+  
+        <mat-list class="overview-amenities__list">
+          <mat-list-item *ngFor="let item of apartment[amenitiesItem.index]">
+            <img class="overview-amenities__list__icon"
+                 [alt]="item"
+                 src="{{svgUrl}}/{{item.replace('/', '').split(' ').join('+')}}.svg">
+            {{item}}
+          </mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+    </ng-container>
+  </mat-accordion>
+</div>

@@ -14,10 +14,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex: 0 0 $apartments-container-header;
 
-    flex: 0 0 1rem;
-
-    max-height: 1rem;
+    max-height: $apartments-container-header;
+    min-height: $apartments-container-header;
 
     font-size: 14px;
     z-index: 5;
@@ -32,9 +32,19 @@
   }
 
   &__body {
-    background-color: #fafafa;
+    background-color: $apartments-container-background;
     flex: 1 1 auto;
-    overflow-y: auto;
+    overflow: auto;
+
+    &--no-overflow {
+      overflow: hidden;
+    }
+
+    &__filters {
+      &__search {
+
+      }
+    }
   }
 }
 
@@ -63,10 +73,13 @@
   }
 }
 
-.silent-text {
-  color: $silent-text;
-}
 
+// Helpers
 .w-100 {
   width: 100%;
+}
+
+
+.silent-text {
+  color: $silent-text;
 }

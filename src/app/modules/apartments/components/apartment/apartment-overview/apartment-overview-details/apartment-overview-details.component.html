@@ -1,0 +1,38 @@
+<div class="overview-details">
+  <mat-list>
+    <ng-container *ngFor="let item of detailsList">
+      <div class="overview-details__header" mat-subheader>
+        {{item.title}}
+        <mat-icon color="accent" mat-list-icon>{{item.icon}}</mat-icon>
+      </div>
+      
+      <ng-container *ngIf="item.items.length">
+        <ng-container *ngFor="let value of item.items"
+                      [ngTemplateOutlet]="matListItem"
+                      [ngTemplateOutletContext]="{
+                        value: value,
+                        icon: item.icon
+                      }">
+    
+        </ng-container>
+      </ng-container>
+  
+      <ng-container *ngIf="item.value"
+                    [ngTemplateOutlet]="matListItem"
+                    [ngTemplateOutletContext]="{
+                      value: item.value,
+                      icon: item.icon
+                    }">
+        
+      </ng-container>
+  
+      <ng-template #matListItem let-value="value" let-icon="icon">
+        <mat-list-item>
+          - {{value}}
+        </mat-list-item>
+      </ng-template>
+      
+      <mat-divider></mat-divider>
+    </ng-container>
+  </mat-list>
+</div>

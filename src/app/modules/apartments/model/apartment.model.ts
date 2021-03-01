@@ -140,3 +140,25 @@ export interface Apartment extends ApartmentLight, ApartmentFull{
     marker?: CustomMarker;
 }
 
+export interface ApartmentsFilterTerm {
+    bySearch?: string;
+    byFavorite?: boolean;
+    byPets?: boolean;
+    byCity?: string;
+    byStreet?: string;
+}
+
+
+export interface ApartmentsFilterCondition {
+    type: string;
+    term: FilterTerm;
+    items: string[];
+}
+
+export enum FilterTerm  {
+    BySearch = 'bySearch',
+    ByFavorite = 'byFavorite',
+    ByPets = 'byPets',
+    ByCity = 'byCity',
+    ByStreet = 'byStreet'
+}

@@ -1,0 +1,40 @@
+<div class="filters mat-elevation-z3">
+  <form class="filters__form" #filterForm="ngForm" (ngSubmit)="submitForm(filterForm)" novalidate>
+    <mat-form-field class="filters__form__search w-100" appearance="legacy">
+      <mat-label>Search by name</mat-label>
+      <input name="bySearch" ngModel matInput>
+    </mat-form-field>
+    
+    
+    <div class="filters__form__select-container" [class.filters__form__select-container--hidden]="!isExpanded">
+      <mat-form-field *ngFor="let extraFilter of extraFilters"
+                      class="filters__form__select w-100"
+                      appearance="legacy">
+        <mat-label>{{extraFilter.type}}</mat-label>
+        <mat-select [name]="extraFilter.term" ngModel>
+          <mat-option>All</mat-option>
+          <mat-option *ngFor="let item of extraFilter.items"
+                      [value]="item">
+            {{item}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+    <button class="w-100" mat-raised-button color="accent" type="submit">
+        <mat-icon>filter_alt</mat-icon> Filter
+    </button>
+  </form>
+  
+  <div class="filters__actions">
+    <app-fav-icon [isFavorite]="filterFavorite" (clicked)="toggleFavorite()"></app-fav-icon>
+    
+    <button (click)="isExpanded = !isExpanded" mat-icon-button color="primary">
+      <mat-icon>
+        {{ isExpanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}
+      </mat-icon>
+    </button>
+  </div>
+
+</div>

@@ -17,7 +17,7 @@ import * as fromApartments from '../../apartments.selectors';
 })
 export class MapViewComponent implements OnInit {
   apartments$!: Observable<Apartment[]>;
-  markers!: CustomMarker[];
+  isApartmentSelected: boolean;
   editMode: boolean;
 
   constructor(
@@ -27,6 +27,7 @@ export class MapViewComponent implements OnInit {
     private mapService: MapService,
     public apartmentsService: ApartmentsService,
   ) {
+    this.isApartmentSelected = false;
     this.editMode = false;
   }
 
@@ -42,23 +43,23 @@ export class MapViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.pipe(select(fromApartments.selectEditMode)).subscribe((editMode) => {
-      console.log('Edit mode', editMode);
       this.editMode = editMode;
     });
 
     this.mapService.buildMap(this.hostElement.nativeElement);
     this.apartments$ = combineLatest([
-      this.store.pipe(select(fromApartments.selectAllApartments)),
+      this.store.pipe(select(fromApartments.setFilteredApartments)),
       this.store.pipe(select(fromApartments.selectCurrentSelectedApartment))
     ]).pipe(
       map(([apartmentsList, selectedApartment]) => {
+        this.isApartmentSelected = !!selectedApartment;
+
         // This validation below ensures that only on the exact condition the markers get rendered and avoid unnecessary effects
         const apartments = MapViewComponent.getValidApartments(apartmentsList, selectedApartment);
         return this.parseApartmentsMarkers(apartments);
       }),
       distinctUntilChanged(),
       tap(apartments => {
-        console.log('Launch fly effect');
         if (apartments?.length) {
           this.handleFlyMapSideEffect(apartments);
         }
@@ -79,8 +80,8 @@ export class MapViewComponent implements OnInit {
     };
   }
 
-  onMarkerClicked(marker: CustomMarker, isMulti: boolean): void {
-    if (isMulti) {
+  onMarkerClicked(marker: CustomMarker, isSelected: boolean): void {
+    if (!isSelected) {
       const markerApartment = marker.data;
       this.route.navigate([markerApartment.propertyID]);
     }
@@ -102,10 +103,6 @@ export class MapViewComponent implements OnInit {
 
   getAllApartmentsCoords(apartments: Apartment[]): [number, number][] {
     return apartments.map(({geocode}) => [+geocode.Longitude, +geocode.Latitude]);
-  }
-
-  trackById(index: number, apartment: Apartment): number {
-    return apartment.propertyID;
   }
 
   toggleEditMode(): void {

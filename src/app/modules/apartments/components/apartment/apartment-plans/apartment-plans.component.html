@@ -1,1 +1,28 @@
-<p>apartment-plans works!</p>
+<div class="overview-plans">
+  <mat-accordion>
+    <ng-container *ngFor="let plan of apartment.floorplans; let i=index">
+      <mat-expansion-panel *ngIf="plan.isAvailable">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Plan #{{ i + 1}}
+          </mat-panel-title>
+          <mat-panel-description>
+            ${{ plan.price }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        
+        <mat-card class="overview-plans__card">
+          <img *ngIf="plan.photoUrl" [src]="plan.photoUrl" [alt]="plan.price">
+          <div class="overview-plans__card__info">
+            <div class="overview-plans__card__info__item" *ngFor="let item of itemsSchema">
+              <mat-icon color="accent">{{item.icon}}</mat-icon>
+              -
+              <span>{{plan[item.id]}}</span>
+            </div>
+          </div>
+
+        </mat-card>
+      </mat-expansion-panel>
+    </ng-container>
+  </mat-accordion>
+</div>

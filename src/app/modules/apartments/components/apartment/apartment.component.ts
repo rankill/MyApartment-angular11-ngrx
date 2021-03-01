@@ -6,7 +6,7 @@ import {ApartmentsActions} from '../../action-types';
 import {select, Store} from '@ngrx/store';
 import {selectCurrentSelectedApartment} from '../../apartments.selectors';
 import {Update} from '@ngrx/entity';
-import {apartmentSelectedUpdate, apartmentUpdated} from '../../apartments.actions';
+import {apartmentSelectedUpdate, apartmentUpdated, clearFilters} from '../../apartments.actions';
 import {ApartmentsService} from '../../services/apartments.service';
 
 @Component({
@@ -26,6 +26,7 @@ export class ApartmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.apartment$ = this.store.pipe(select(selectCurrentSelectedApartment));
+    // this.store.dispatch(clearFilters());
   }
 
   goBack(): void {

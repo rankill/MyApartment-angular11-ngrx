@@ -1,10 +1,10 @@
-const CDN_URL = 'https://cdn.smartapartmentdata.com/';
+const CDN_URL = 'https://cdn.smartapartmentdata.com';
 
 export const environment = {
-  production: false,
-  apiUrl: 'https://app.smartapartmentdata.com/List/json/',
+  production: true,
+  apiUrl: 'https://app.smartapartmentdata.com/List/json',
   cdnUrl: CDN_URL,
-  svgUrl: `${CDN_URL}/images/svg/32/Access+Gates.svg`,
+  svgUrl: `${CDN_URL}/images/svg/32`,
   token: '5AE7DFB40500DDC03BC84BD3F0A8AC0F18784B1E',
   listID: '5363950',
   tokenAlt: 'A0E2523B25B805CBB6F8EC9D98AF56457EE7A255',

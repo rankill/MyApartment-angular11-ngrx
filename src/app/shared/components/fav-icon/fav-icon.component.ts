@@ -19,7 +19,8 @@ export class FavIconComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onClick() {
+  onClick(event: Event): void {
+    event.stopPropagation();
     this.clicked.emit(this.isFavorite);
   }
 

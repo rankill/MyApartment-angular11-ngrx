@@ -19,6 +19,7 @@ import {metaReducers, reducers} from './reducers';
 // Modules
 import {CoreModule} from './core/core.module';
 import {ApartmentsModule} from './modules/apartments/apartments.module';
+import {LoadingBarHttpClientModule} from '@ngx-loading-bar/http-client';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import {ApartmentsModule} from './modules/apartments/apartments.module';
     StoreRouterConnectingModule.forRoot({
       stateKey: 'router',
       routerState: RouterState.Minimal
-    })
+    }),
+    LoadingBarHttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

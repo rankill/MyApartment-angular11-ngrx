@@ -2,15 +2,27 @@ import {createReducer, on} from '@ngrx/store';
 import {ApartmentsActions} from '../action-types';
 import {AgentInfo} from '../model/agent.model';
 import {createEntityAdapter, EntityState} from '@ngrx/entity';
-import {Apartment} from '../model/apartment.model';
+import {Apartment, ApartmentsFilterTerm} from '../model/apartment.model';
+
+const initialStateFilters: ApartmentsFilterTerm = {
+  bySearch: '',
+  byFavorite: false,
+  byPets: false
+};
 
 export interface ApartmentState extends EntityState<Apartment> {
   allApartmentsLoaded: boolean;
   agentInfo: AgentInfo;
   filteredApartments: Apartment;
+
   selectedApartment: Apartment;
   selectedApartmentLoaded: boolean;
+
   isEditModeEnabled: boolean;
+
+  filters: ApartmentsFilterTerm;
+
+  apartmentHighlightedId: number;
 }
 
 export const adapter = createEntityAdapter<Apartment>({
@@ -20,7 +32,9 @@ export const adapter = createEntityAdapter<Apartment>({
 export const initialApartmentsState = adapter.getInitialState({
   allApartmentsLoaded: false,
   selectedApartmentLoaded: false,
-  isEditModeEnabled: false
+  isEditModeEnabled: false,
+
+  filters: initialStateFilters,
 });
 
 export const apartmentsReducer = createReducer(
@@ -41,7 +55,20 @@ export const apartmentsReducer = createReducer(
   }),
 
   on(ApartmentsActions.apartmentLoaded, (state, { apartment }) => {
-    return { ...state, selectedApartment: apartment, selectedApartmentLoaded: true };
+    const apartmentFromList = state.entities[apartment.propertyID];
+    return {
+      ...state,
+      selectedApartment: {
+        ...apartment,
+        // This extra assignation can be removed if there is an endpoint to save the updated apartment location
+        // this is for simulate backend and sync properly
+        geocode: {
+          Latitude: apartmentFromList ? apartmentFromList.geocode.Latitude : apartment.geocode.Latitude,
+          Longitude: apartmentFromList ? apartmentFromList.geocode.Longitude : apartment.geocode.Longitude
+        }
+      },
+      selectedApartmentLoaded: true
+    };
   }),
 
   on(ApartmentsActions.clearSelectedApartment, (state) => {
@@ -50,6 +77,24 @@ export const apartmentsReducer = createReducer(
 
   on(ApartmentsActions.toggleEditMode, (state) => {
     return { ...state, isEditModeEnabled: !state.isEditModeEnabled};
+  }),
+
+
+  on(ApartmentsActions.updateFilters, (state, {filters}) => {
+    return {
+      ...state,
+      filters: {
+        ...state.filters,
+        ...filters
+      }
+    };
+  }),
+
+  on(ApartmentsActions.clearFilters, (state) => {
+    return {
+      ...state,
+      filters: initialStateFilters
+    };
   }),
 );
 

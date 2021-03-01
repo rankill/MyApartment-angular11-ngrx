@@ -1,10 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Apartment} from '../../model/apartment.model';
-import {Store} from '@ngrx/store';
-import {ApartmentsService} from '../../services/apartments.service';
+import {Component, Input} from '@angular/core';
+import {Apartment} from '../../../model/apartment.model';
+import {ApartmentsService} from '../../../services/apartments.service';
 
 @Component({
-  selector: 'app-apartments-thumbnail',
+  selector: 'app-apartments-card',
   templateUrl: './apartment-card.component.html',
   styleUrls: ['./apartment-card.component.scss'],
 })

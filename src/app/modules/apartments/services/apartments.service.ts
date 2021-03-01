@@ -59,28 +59,28 @@ export class ApartmentsService {
       }
     };
 
-    this.launchApartmentUpdate(update, apartment, updateSelected);
+    this.launchApartmentUpdate(update, tempApartment, updateSelected);
   }
 
   updateApartmentLocation(apartment: Apartment, newCoords: LngLat, updateSelected = false): void {
     const tempApartment: Apartment = { ...apartment};
 
-    tempApartment.favorite = !apartment.favorite;
+    tempApartment.geocode = {
+      Longitude: String(newCoords.lng),
+      Latitude: String(newCoords.lat),
+      Percision: tempApartment.geocode.Percision,
+      IsValid: tempApartment.geocode.IsValid
+    };
 
     const update: Update<Apartment> = {
       id: tempApartment.propertyID,
       changes: {
-        geocode: {
-          Longitude: String(newCoords.lng),
-          Latitude: String(newCoords.lat),
-          Percision: tempApartment.geocode.Percision,
-          IsValid: tempApartment.geocode.IsValid
-        }
+        geocode: tempApartment.geocode
       }
     };
 
    // Here we would call our service to update our apartment - Currently the endpoint is the same as favorite
-    this.launchApartmentUpdate(update, apartment, updateSelected);
+    this.launchApartmentUpdate(update, tempApartment, updateSelected);
   }
 
   launchApartmentUpdate(update: Update<Apartment>, apartment: Apartment, updateSelected: boolean): void {

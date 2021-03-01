@@ -16,7 +16,7 @@ import set = Reflect.set;
 })
 export class MapMarkerComponent implements OnInit, OnDestroy {
   @Input() marker!: CustomMarker | undefined;
-  @Input() isMulti: boolean;
+  @Input() isSelected: boolean;
 
   @Output() clicked: EventEmitter<CustomMarker>;
   @Output() locationUpdated: EventEmitter<LngLat>;
@@ -31,17 +31,17 @@ export class MapMarkerComponent implements OnInit, OnDestroy {
   ) {
     this.clicked = new EventEmitter<CustomMarker>();
     this.locationUpdated = new EventEmitter<LngLat>();
-    this.isMulti = false;
+    this.isSelected = false;
     this.dragging = false;
   }
 
   ngOnInit(): void {
     if (this.marker) {
       this.markerInstance = this.mapService.addMarker(this.marker, this.hostElement.nativeElement);
+      this.initBindings();
     }
 
     this.store.pipe(select(fromApartments.selectEditMode)).subscribe((editMode) => {
-      console.log('Edit mode marker', editMode);
       if (this.markerInstance) {
         this.markerInstance.setDraggable(editMode);
       }
@@ -55,7 +55,19 @@ export class MapMarkerComponent implements OnInit, OnDestroy {
   }
 
   markerClicked(): void {
+    if (!this.dragging) {
     this.clicked.emit(this.marker);
   }
+  }
 
+  initBindings(): void {
+    this.markerInstance.on('dragend', () => {
+      this.locationUpdated.emit(this.markerInstance.getLngLat());
+      this.dragging = false;
+    });
+
+    this.markerInstance.on('dragstart', () => {
+      this.dragging = true;
+    });
+  }
 }

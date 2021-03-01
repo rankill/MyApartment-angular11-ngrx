@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {ApartmentsActions} from './action-types';
-import {catchError, concatMap, map, tap} from 'rxjs/operators';
-import {allApartmentsLoaded, apartmentLoaded} from './apartments.actions';
+import {catchError, concatMap, map, switchMap, tap} from 'rxjs/operators';
+import {allApartmentsLoaded, apartmentLoaded, clearFilters} from './apartments.actions';
 import {ApartmentsService} from './services/apartments.service';
 import {Router} from '@angular/router';
 import {EMPTY} from 'rxjs';
@@ -25,9 +25,12 @@ export class ApartmentsEffects {
       .pipe(
         ofType(ApartmentsActions.loadApartment),
         concatMap(action => this.apartmentsService.findApartmentById(action.apartmentId)),
-        map((apartmentResponse: Apartment) => {
+        switchMap((apartmentResponse: Apartment) => {
           if (!apartmentResponse.error) {
-            return apartmentLoaded({apartment: apartmentResponse});
+            return [
+              apartmentLoaded({apartment: apartmentResponse}),
+              clearFilters()
+            ];
           }
           throw new Error();
         }),

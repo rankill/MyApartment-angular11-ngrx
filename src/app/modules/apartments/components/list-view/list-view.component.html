@@ -5,9 +5,10 @@
     </span>
   </div>
   <div class="apartments-container__body">
+    <app-list-view-filters (filtered)="launchFilter($event)" [extraFilters]="extraFilters"></app-list-view-filters>
+    
     <ng-container *ngFor="let apartment of apartments$ | async; trackBy: trackById">
-      
-      <app-apartments-thumbnail [apartment]="apartment"></app-apartments-thumbnail>
+      <app-apartments-card [apartment]="apartment"></app-apartments-card>
     </ng-container>
   </div>
 </section>

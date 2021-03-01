@@ -9,23 +9,25 @@
     </button>
   </div>
   
-  <p class="apartments-header__address">{{apartment.streetAddress ? apartment.streetAddress + '-' : ''}} {{apartment.city}}</p>
+  <p class="apartments-header__address">
+    {{apartment.streetAddress ? apartment.streetAddress + '-' : ''}} {{apartment.city}}
+  </p>
   
   
   <!--  MORE OPTIONS MENU --->
   <mat-menu #menu="matMenu">
-    <button *ngIf="apartment.email" mat-menu-item>
+    <a class="apartments-link" href="mailto:{{apartment.email}}" mat-menu-item>
       <mat-icon>mail</mat-icon>
       <span>Email</span>
-    </button>
-    <button *ngIf="apartment.phone" mat-menu-item>
+    </a>
+    <a class="apartments-link" href="tel:{{apartment.phone}}" mat-menu-item>
       <mat-icon>phone</mat-icon>
       <span>Phone</span>
-    </button>
-    <button *ngIf="apartment.url" mat-menu-item>
+    </a>
+    <a class="apartments-link" [href]="apartment.url" target="_blank" mat-menu-item>
       <mat-icon>open_in_browser</mat-icon>
       <span>Website</span>
-    </button>
+    </a>
   </mat-menu>
 </div>
 

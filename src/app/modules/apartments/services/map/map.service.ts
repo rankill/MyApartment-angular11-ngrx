@@ -1,8 +1,8 @@
 import {ComponentRef, Injectable, Injector} from '@angular/core';
 import { environment } from '@env/environment';
 import {LngLatLike, Marker, Map, Popup, LngLatBounds} from 'mapbox-gl';
-import {CenterOnMarkersControl} from './controls/center-on-markers';
 import {CustomMarker} from '../../model/map.model';
+import {CommonIconControl} from './controls/common-icon.control';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,11 @@ export class MapService {
   mapMarkers: {marker: CustomMarker, instance: Marker}[];
 
   // Controls
-  centerOnMarkersControl = new CenterOnMarkersControl();
+  centerOnMarkersControl = new CommonIconControl(
+    '/assets/icons/center-map.svg',
+    'Center On Marker Control',
+    'mapboxgl-ctrl__center-on-markers'
+  );
 
   constructor() {
     this.mapMarkers = [];
@@ -37,9 +41,7 @@ export class MapService {
       logoPosition: 'top-right'
     });
 
-    this.centerOnMarkersControl.onPressed(() => {
-      this.goToMarkersBounds();
-    });
+    this.centerOnMarkersControl.onPressed(() => this.goToMarkersBounds());
     this.map.addControl(this.centerOnMarkersControl, 'bottom-left');
   }
 
@@ -55,7 +57,6 @@ export class MapService {
       instance: markerInstance
     });
 
-    console.log(this.mapMarkers);
     return markerInstance;
   }
 

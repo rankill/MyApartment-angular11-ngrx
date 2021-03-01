@@ -7,9 +7,23 @@ import {Apartment} from '../../../model/apartment.model';
   styleUrls: ['./apartment-plans.component.scss']
 })
 export class ApartmentPlansComponent implements OnInit {
-  @Input() apartment!: Apartment;
+  @Input() apartment!: Record<string, any>;
+  itemsSchema: Record<string, any>[];
 
-  constructor() { }
+  constructor() {
+    this.itemsSchema = [
+      {
+        id: 'bed',
+        icon: 'bed'
+      }, {
+        id: 'bath',
+        icon: 'bathtub'
+      }, {
+        id: 'sqft',
+        icon: 'square_foot'
+      }
+    ];
+  }
 
   ngOnInit(): void {
   }
