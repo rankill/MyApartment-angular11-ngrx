@@ -1,12 +1,14 @@
-import { TestBed } from '@angular/core/testing';
+// @ts-ignore
+import {TestBed, waitForAsync} from '@angular/core/testing';
+// @ts-ignore
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import {LoadingBarHttpClientModule} from '@ngx-loading-bar/http-client';
 import {FooterComponent} from './core/components/footer/footer.component';
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach( waitForAsync (() => {
+    TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
         LoadingBarHttpClientModule
@@ -16,7 +18,7 @@ describe('AppComponent', () => {
         FooterComponent
       ],
     }).compileComponents();
-  });
+  }));
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);

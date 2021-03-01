@@ -7,6 +7,7 @@ import {Title} from '@angular/platform-browser';
 import {filter, map} from 'rxjs/operators';
 import {ApartmentsModule} from '../modules/apartments/apartments.module';
 import {MapService} from '../modules/apartments/services/map/map.service';
+import {deepCloneNode} from '@angular/cdk/drag-drop/clone-node';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ export class CoreModule {
           if (child.firstChild) {
             child = child.firstChild;
           } else if (child.snapshot.data && child.snapshot.data.title) {
-            return child.snapshot.data.title;
+            const id = child.snapshot.params[child.snapshot.data.id];
+            return `${child.snapshot.data.title}${id ? ` - ${id}` : ''}`;
           } else {
             return null;
           }

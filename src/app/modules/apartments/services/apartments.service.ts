@@ -79,7 +79,7 @@ export class ApartmentsService {
       }
     };
 
-   // Here we would call our service to update our apartment - Currently the endpoint is the same as favorite
+    // Here we would call our service to update our apartment - Currently the endpoint is the same as favorite
     this.launchApartmentUpdate(update, tempApartment, updateSelected);
   }
 

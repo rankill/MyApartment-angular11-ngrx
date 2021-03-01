@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {Apartment} from '../../../model/apartment.model';
-import {ApartmentsService} from '../../../services/apartments.service';
+import {Apartment} from '../../model/apartment.model';
+import {ApartmentsService} from '../../services/apartments.service';
 
 @Component({
   selector: 'app-apartments-card',

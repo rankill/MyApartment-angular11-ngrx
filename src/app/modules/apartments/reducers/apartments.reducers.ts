@@ -21,8 +21,6 @@ export interface ApartmentState extends EntityState<Apartment> {
   isEditModeEnabled: boolean;
 
   filters: ApartmentsFilterTerm;
-
-  apartmentHighlightedId: number;
 }
 
 export const adapter = createEntityAdapter<Apartment>({

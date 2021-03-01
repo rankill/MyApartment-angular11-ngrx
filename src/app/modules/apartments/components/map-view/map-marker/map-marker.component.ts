@@ -4,18 +4,18 @@ import {MapService} from '../../../services/map/map.service';
 
 import {LngLat, Marker} from 'mapbox-gl';
 import {CustomMarker} from '../../../model/map.model';
-import {select, Store} from '@ngrx/store';
-import * as fromApartments from '../../../apartments.selectors';
-import set = Reflect.set;
+import {Store} from '@ngrx/store';
 
 
 @Component({
   selector: 'app-map-marker',
   templateUrl: './map-marker.component.html',
-  styleUrls: ['./map-marker.component.scss']
+  styleUrls: ['./map-marker.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MapMarkerComponent implements OnInit, OnDestroy {
   @Input() marker!: CustomMarker | undefined;
+  @Input() isEditable!: boolean;
   @Input() isSelected: boolean;
 
   @Output() clicked: EventEmitter<CustomMarker>;
@@ -31,6 +31,7 @@ export class MapMarkerComponent implements OnInit, OnDestroy {
   ) {
     this.clicked = new EventEmitter<CustomMarker>();
     this.locationUpdated = new EventEmitter<LngLat>();
+    this.isEditable = false;
     this.isSelected = false;
     this.dragging = false;
   }
@@ -40,12 +41,6 @@ export class MapMarkerComponent implements OnInit, OnDestroy {
       this.markerInstance = this.mapService.addMarker(this.marker, this.hostElement.nativeElement);
       this.initBindings();
     }
-
-    this.store.pipe(select(fromApartments.selectEditMode)).subscribe((editMode) => {
-      if (this.markerInstance) {
-        this.markerInstance.setDraggable(editMode);
-      }
-    });
   }
 
   ngOnDestroy(): void {
@@ -61,13 +56,18 @@ export class MapMarkerComponent implements OnInit, OnDestroy {
   }
 
   initBindings(): void {
-    this.markerInstance.on('dragend', () => {
-      this.locationUpdated.emit(this.markerInstance.getLngLat());
-      this.dragging = false;
-    });
+    if (this.isEditable) {
+      this.markerInstance.setDraggable(this.isEditable);
 
-    this.markerInstance.on('dragstart', () => {
-      this.dragging = true;
-    });
+      this.markerInstance.on('dragend', () => {
+        this.locationUpdated.emit(this.markerInstance.getLngLat());
+        this.dragging = false;
+      });
+
+      this.markerInstance.on('dragstart', () => {
+        this.dragging = true;
+      });
+    }
+
   }
 }

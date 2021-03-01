@@ -1,10 +1,26 @@
 <section class="home">
   <mat-drawer-container class="home__drawer">
-    <mat-drawer class="home__drawer__sidenav" mode="side" opened="true">
+    
+    <mat-drawer class="home__drawer__sidenav"
+                [class.home__drawer__sidenav__tablet-up]="tabletPortraitUp$ | async"
+                mode="side"
+                [opened]="!showMap || (tabletPortraitUp$ | async)">
       <router-outlet></router-outlet>
     </mat-drawer>
-    <mat-drawer-content class="home__drawer__content" style="width: 100%">
+    
+    <mat-drawer-content [class.home__drawer__content__tablet-up]="tabletPortraitUp$ | async"
+                        class="home__drawer__content w-100">
       <app-map></app-map>
     </mat-drawer-content>
   </mat-drawer-container>
+  
+  
+  <button class="home__toggle-view"
+          mat-fab
+          color="primary"
+          (click)="showMap = !showMap">
+    <mat-icon>
+      {{showMap ? 'list' : 'map'}}
+    </mat-icon>
+  </button>
 </section>

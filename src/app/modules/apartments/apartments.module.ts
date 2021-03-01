@@ -12,7 +12,7 @@ import {MapViewComponent} from './components/map-view/map-view.component';
 import {ListViewComponent} from './components/list-view/list-view.component';
 import {ApartmentComponent} from './components/apartment/apartment.component';
 import {MapMarkerComponent} from './components/map-view/map-marker/map-marker.component';
-import {ApartmentCardComponent } from './components/list-view/apartment-card/apartment-card.component';
+import {ApartmentCardComponent } from './components/apartment-card/apartment-card.component';
 
 import {ApartmentGalleryComponent} from './components/apartment/apartment-gallery/apartment-gallery.component';
 import {ApartmentPlansComponent} from './components/apartment/apartment-plans/apartment-plans.component';
@@ -55,6 +55,7 @@ import {ApartmentSelectedResolvers} from './resolvers/apartment-selected.resolve
 
 // 3rd Party
 import {SharedModule} from '../../shared/shared.module';
+import {LayoutModule} from '@angular/cdk/layout';
 
 @NgModule({
   imports: [
@@ -62,6 +63,7 @@ import {SharedModule} from '../../shared/shared.module';
     HttpClientModule,
     ApartmentsRoutingModule,
     FormsModule,
+    LayoutModule,
     SharedModule,
 
     MatSidenavModule,

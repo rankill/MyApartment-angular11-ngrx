@@ -1,3 +1,4 @@
+// @ts-ignore
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {FooterComponent} from './footer.component';
 import {LoadingBarHttpClientModule} from '@ngx-loading-bar/http-client';

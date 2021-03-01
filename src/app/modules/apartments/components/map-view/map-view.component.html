@@ -2,6 +2,7 @@
     <ng-container *ngFor="let apartment of apartments">
         <app-map-marker *ngIf="apartment"
                         [marker]="apartment.marker"
+                        [isEditable]="editMode"
                         [isSelected]="isApartmentSelected"
                         (clicked)="onMarkerClicked($event, isApartmentSelected)"
                         (locationUpdated)="apartmentsService.updateApartmentLocation(apartment, $event, isApartmentSelected)">

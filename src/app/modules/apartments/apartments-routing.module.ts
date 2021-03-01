@@ -16,6 +16,9 @@ const routes: Routes = [
       {
         path: '',
         component: ListViewComponent,
+        data: {
+          title: 'List'
+        },
         resolve: {
           apartments: ApartmentsResolvers
         },
@@ -23,6 +26,10 @@ const routes: Routes = [
       {
         path: ':apartmentId',
         component: ApartmentComponent,
+        data: {
+          title: 'Detail',
+          id: 'apartmentId'
+        },
         resolve: {
           selectedApartment: ApartmentSelectedResolvers
         },
